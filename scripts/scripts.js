@@ -17,7 +17,7 @@ let arrayNumbers = [1, 2, 3, 4, 5, 6]
 let arrayEmpty = []
 
 // initialize none arrays
-let someNumber = Math.floor(Math.random() * 100)
+let someNumber = 0
 let someString = ""
 
 optionSelected.addEventListener("change", function () {
@@ -87,8 +87,71 @@ optionSelected.addEventListener("change", function () {
             .catch((error) => console.log($(error)))
     } else if (optionSelected.value === 'number') {
         console.log("number: " + (optionSelected.value === 'number'))
-        displayArea.innerHTML = `<p>${someNumber}</p>`
+        someNumber = Math.floor(Math.random() * 100)
+        displayArea.innerHTML += `<p>${someNumber}</p>`
     } else {
         console.log("How did you get here?")
     }
 })
+
+checkArray.addEventListener("click", function () {
+    console.log("Checking Arrays...")
+    let itemChecked = retrieveSelected()
+
+    console.log("Array? " + Array.isArray(itemChecked))
+    console.log("Empty Array? " + itemChecked.length == 0)
+
+    if (Array.isArray(itemChecked)) {
+        displayArea.innerHTML += `<p>The selection is an Array.</p>`
+        if (itemChecked == 0) {
+            displayArea.innerHTML += `<p>The selection is empty inside.</p>`
+        } else {
+            displayArea.innerHTML += `<p>The selection is filled.</p>`
+            // these mentioned will ensure that the type check mentions only once.
+            let mentionedString = 0
+            let mentionedNumber = 0
+            let mentionedObject = 0
+            itemChecked.forEach(element => {
+                if (typeof (element) == "string") {
+                    if (!mentionedString) {
+                        displayArea.innerHTML += `<p>The selection has some String inside.</p>`
+                        mentionedString++
+                    }
+                } else if (typeof (element) == "number") {
+                    if (!mentionedNumber) {
+                        displayArea.innerHTML += `<p>The selection has some Number inside.</p>`
+                        mentionedNumber++
+                    }
+                } else if (typeof (element) == 'object') {
+                    if (!mentionedObject) {
+                        displayArea.innerHTML += `<p>The selection has some Object inside.</p>`
+                        mentionedObject++
+                    }
+                }
+            })
+        }
+    } else {
+        displayArea.innerHTML += `<p>The selection is not an Array.</p>`
+    }
+})
+
+function retrieveSelected() {
+    console.log(optionSelected.value)
+    if (optionSelected.value === 'image-array') {
+        return imageArray
+    } else if (optionSelected.value === 'string-array') {
+        return arrayStrings
+    } else if (optionSelected.value === 'number-array') {
+        return arrayNumbers
+    } else if (optionSelected.value === 'empty-array') {
+        return arrayEmpty
+    } else if (optionSelected.value === 'string') {
+        return someString
+    } else if (optionSelected.value === 'number') {
+        return someNumber
+    } else {
+        console.log("How did you get here?")
+        displayArea.innerHTML += `<p>No Option Selected.</p>`
+        return null
+    }
+}
