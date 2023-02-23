@@ -20,36 +20,35 @@ let arrayEmpty = []
 let someNumber = 0
 let someString = ""
 
+// setup image width and height
+let imageWidth = 247
+let imageHeight = 359
+
+// import images
+let imagePeter = new Image(imageWidth, imageHeight)
+let imageStewie = new Image(imageWidth, imageHeight)
+let imageBrian = new Image(imageWidth, imageHeight)
+let imageChris = new Image(imageWidth, imageHeight)
+let imageQuagmire = new Image(imageWidth, imageHeight)
+
+imagePeter.src = "https://upload.wikimedia.org/wikipedia/en/c/c2/Peter_Griffin.png?20110515154115"
+imageStewie.src = "https://upload.wikimedia.org/wikipedia/en/0/02/Stewie_Griffin.png"
+imageBrian.src = "https://upload.wikimedia.org/wikipedia/en/1/12/Brian_Griffin.png?20131212131323"
+imageChris.src = "https://upload.wikimedia.org/wikipedia/en/d/df/Chris_Griffin.png?20110630224907"
+imageQuagmire.src = "https://upload.wikimedia.org/wikipedia/en/f/fe/Glenn_Quagmire.png"
+
+// add to Array
+imageArray.push(imagePeter)
+imageArray.push(imageStewie)
+imageArray.push(imageBrian)
+imageArray.push(imageChris)
+imageArray.push(imageQuagmire)
+
 optionSelected.addEventListener("change", function () {
     displayArea.innerHTML = ""
     console.log(optionSelected.value)
     if (optionSelected.value === 'image-array') {
         console.log("image array: " + (optionSelected.value === 'image-array'))
-
-        // setup image width and height
-        let imageWidth = 247
-        let imageHeight = 359
-
-        // import images
-        let imagePeter = new Image(imageWidth, imageHeight)
-        let imageStewie = new Image(imageWidth, imageHeight)
-        let imageBrian = new Image(imageWidth, imageHeight)
-        let imageChris = new Image(imageWidth, imageHeight)
-        let imageQuagmire = new Image(imageWidth, imageHeight)
-
-        imagePeter.src = "https://upload.wikimedia.org/wikipedia/en/c/c2/Peter_Griffin.png?20110515154115"
-        imageStewie.src = "https://upload.wikimedia.org/wikipedia/en/0/02/Stewie_Griffin.png"
-        imageBrian.src = "https://upload.wikimedia.org/wikipedia/en/1/12/Brian_Griffin.png?20131212131323"
-        imageChris.src = "https://upload.wikimedia.org/wikipedia/en/d/df/Chris_Griffin.png?20110630224907"
-        imageQuagmire.src = "https://upload.wikimedia.org/wikipedia/en/f/fe/Glenn_Quagmire.png"
-
-        // add to Array
-        imageArray.push(imagePeter)
-        imageArray.push(imageStewie)
-        imageArray.push(imageBrian)
-        imageArray.push(imageChris)
-        imageArray.push(imageQuagmire)
-
         // append to displayArea
         imageArray.forEach(image => {
             displayArea.appendChild(image)
