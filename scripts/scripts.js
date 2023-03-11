@@ -44,17 +44,28 @@ imageArray.push(imageBrian)
 imageArray.push(imageChris)
 imageArray.push(imageQuagmire)
 
+imageArray.forEach(element => {
+    element.style.border = "1px solid gold"
+    element.style.borderRadius = "8px"
+})
+
 optionSelected.addEventListener("change", function () {
     displayArea.innerHTML = ""
     console.log(optionSelected.value)
+
+    displayArea.className = "d-flex flex-column"
+
     if (optionSelected.value === 'image-array') {
         console.log("image array: " + (optionSelected.value === 'image-array'))
         // append to displayArea
+        displayArea.className = "mt-3 d-flex flex-row flex-wrap"
         imageArray.forEach(image => {
             displayArea.appendChild(image)
         })
     } else if (optionSelected.value === 'string-array') {
         console.log("string array: " + (optionSelected.value === 'string-array'))
+        displayArea.className = "p-3 bg-success rounded text-white"
+        displayArea.innerHTML += "<h3>String Array</h3>"
         displayArea.innerHTML += "<ul>"
         arrayStrings.forEach(string => {
             displayArea.innerHTML += "<li>" + string + "</li>"
@@ -62,7 +73,9 @@ optionSelected.addEventListener("change", function () {
         displayArea.innerHTML += "</ul>"
     } else if (optionSelected.value === 'number-array') {
         console.log("number array: " + (optionSelected.value === 'number-array'))
-        displayArea.innerHTML += "<ul>"
+        displayArea.className = "bg-success p-3 rounded mt-3 text-white"
+        displayArea.innerHTML += "<h3>Number Array</h3>"
+        displayArea.innerHTML += `<ul>`
         arrayNumbers.forEach(number => {
             displayArea.innerHTML += "<li>" + number + "</li>"
         })
@@ -81,13 +94,15 @@ optionSelected.addEventListener("change", function () {
             })
             .then((text) => {
                 someNumber = JSON.parse(text)[0]
-                displayArea.innerHTML += `<p>${someNumber}</p>`
+                displayArea.className = "bg-success p-3 rounded text-white"
+                displayArea.innerHTML += `<p>Random Word API: <span>${someNumber}</span></p>`
             })
             .catch((error) => console.log($(error)))
     } else if (optionSelected.value === 'number') {
         console.log("number: " + (optionSelected.value === 'number'))
         someNumber = Math.floor(Math.random() * 100)
-        displayArea.innerHTML += `<p>${someNumber}</p>`
+        displayArea.className = "bg-success p-3 rounded text-white"
+        displayArea.innerHTML += `<p>Random Number: <span>${someNumber}</span></p>`
     } else {
         console.log("How did you get here?")
     }
